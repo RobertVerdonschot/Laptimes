@@ -53,10 +53,20 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="ViewModel\ScreensVM.cs" />
-    <Compile Include="View\Screens.xaml.cs">
-      <DependentUpon>Screens.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="Converters\AndOperatorConverter.cs" />
+    <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
+    <Compile Include="Converters\DictionaryValueConverter .cs" />
+    <Compile Include="Converters\EnumVisibilityConverter.cs" />
+    <Compile Include="Converters\LocalizedDictionaryValueConverter.cs" />
+    <Compile Include="Converters\NumericConverter.cs" />
+    <Compile Include="Converters\OrOperatorConverter.cs" />
+    <Compile Include="MarkupExtentions\BindToMarkupExtension.cs" />
+    <Compile Include="MarkupExtentions\EnumerationExtention.cs" />
+    <Compile Include="ViewModel\MainWindowViewModel.cs" />
+    <Page Include="GlobalResources.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -69,10 +79,6 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="View\Screens.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -102,10 +108,17 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Controls\" />
     <Folder Include="Model\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="View\LTicon_s.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="MicroMvvm\MicroMvvm.csproj">
+      <Project>{9efe6cbd-df21-436e-9f81-e258bab0b653}</Project>
+      <Name>MicroMvvm</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

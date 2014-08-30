@@ -1,0 +1,14 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:converters="clr-namespace:LapTimes.Converters">
+
+    <converters:EnumVisibilityConverter x:Key="IsDisabledConvert" IsReversed="True" />
+    <converters:EnumVisibilityConverter x:Key="EnumVisibileCollapsed" IsReversed="False" UseHidden="False" />
+    <converters:EnumVisibilityConverter x:Key="EnumNotVisibileCollapsed" IsReversed="True" UseHidden="False" />
+    <converters:EnumVisibilityConverter x:Key="EnumVisibile" IsReversed="False" UseHidden="True" />
+    <converters:EnumVisibilityConverter x:Key="EnumNotVisibile" IsReversed="True" UseHidden="True" />
+    <converters:OrOperatorConverter x:Key="OrOperatorConverter" IsReversed="False" UseHidden="True" />
+    <converters:AndOperatorConverter x:Key="AndOperatorConverter" IsReversed="False" UseHidden="True" />
+    <BooleanToVisibilityConverter x:Key="BoolToVisible"/>
+
+</ResourceDictionary>

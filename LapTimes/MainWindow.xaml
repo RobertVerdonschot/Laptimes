@@ -2,11 +2,50 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="LapTimes" Height="480" Width="360"
-        xmlns:view="clr-namespace:LapTimes.View"
-        Icon="View\LTicon_s.png">
+        Icon="View\LTicon_s.png"
+        xmlns:local="clr-namespace:LapTimes"
+        xmlns:viewmodel="clr-namespace:LapTimes.ViewModel" >
+
+    <Window.DataContext>        
+        <viewmodel:MainWindowViewModel />
+    </Window.DataContext>
     
     <Grid>
-        <view:Screens />
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <StackPanel Grid.Row="0" Orientation="Horizontal">
+            <Image Source="View/LTicon_s.png" Height="20" Margin="10,0" 
+                               HorizontalAlignment="Left" VerticalAlignment="Center" />
+            <TextBlock Text="Ronden" 
+                       Visibility="{Binding ActiveScreen, Converter={StaticResource EnumVisibileCollapsed}, ConverterParameter=Laps}"
+                       Margin="0,0" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="18"/>
+            <TextBlock Text="Setup" 
+                       Visibility="{Binding ActiveScreen, Converter={StaticResource EnumVisibileCollapsed}, ConverterParameter=Setup}"
+                       Margin="0,0" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="18"/>
+            <TextBlock Text="Analyse" 
+                       Visibility="{Binding ActiveScreen, Converter={StaticResource EnumVisibileCollapsed}, ConverterParameter=Analyse}"
+                       Margin="0,0" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="18"/>
+        </StackPanel>
+
+        <!-- Screen body -->
+
+        <!-- Navigation buttons -->
+        <StackPanel Grid.Row="2" Orientation="Horizontal" FlowDirection="LeftToRight" >
+            <Button Content="Setup" Command="{Binding NavigateToSetup}"
+                    Visibility="{Binding ActiveScreen, Converter={StaticResource EnumVisibileCollapsed}, ConverterParameter=Laps}"
+                    Margin="10,10" Width="75" VerticalAlignment="Stretch" HorizontalAlignment="Center" FontSize="16" />
+            <Button Content="Analyse" Command="{Binding NavigateToAnalyse}"
+                    Visibility="{Binding ActiveScreen, Converter={StaticResource EnumVisibileCollapsed}, ConverterParameter=Laps}"
+                    Margin="10,10" Width="75" VerticalAlignment="Stretch" HorizontalAlignment="Center" FontSize="16" />
+            <Button Content="Back" Command="{Binding NavigateBack}"
+                    Visibility="{Binding ActiveScreen, Converter={StaticResource EnumNotVisibileCollapsed}, ConverterParameter=Laps}"
+                    Margin="10,10" Width="75" VerticalAlignment="Stretch" HorizontalAlignment="Right" FontSize="16"  />
+        </StackPanel>
     </Grid>
-    
+
 </Window>
