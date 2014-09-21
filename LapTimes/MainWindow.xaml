@@ -4,11 +4,18 @@
         Title="LapTimes" Height="480" Width="360"
         Icon="View\LTicon_s.png"
         xmlns:local="clr-namespace:LapTimes"
-        xmlns:viewmodel="clr-namespace:LapTimes.ViewModel" >
+        xmlns:viewmodel="clr-namespace:LapTimes.ViewModel" 
+        xmlns:controls="clr-namespace:LapTimes.Controls" >
 
     <Window.DataContext>        
         <viewmodel:MainWindowViewModel />
     </Window.DataContext>
+
+    <Window.Resources>
+        <Style TargetType="{x:Type GridViewColumnHeader}">
+            <Setter Property="HorizontalContentAlignment" Value="Left" />
+        </Style>
+    </Window.Resources>
     
     <Grid>
         <Grid.RowDefinitions>
@@ -21,7 +28,7 @@
         <StackPanel Grid.Row="0" Orientation="Horizontal">
             <Image Source="View/LTicon_s.png" Height="20" Margin="10,0" 
                                HorizontalAlignment="Left" VerticalAlignment="Center" />
-            <TextBlock Text="Ronden" 
+            <TextBlock Text="Ronden"   
                        Visibility="{Binding ActiveScreen, Converter={StaticResource EnumVisibileCollapsed}, ConverterParameter=Laps}"
                        Margin="0,0" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="18"/>
             <TextBlock Text="Setup" 
@@ -33,7 +40,13 @@
         </StackPanel>
 
         <!-- Screen body -->
-
+        <controls:LapsScreen Grid.Row="1"                              
+                             Visibility="{Binding ActiveScreen, Converter={StaticResource EnumVisibileCollapsed}, ConverterParameter=Laps}" />
+<!--    <controls:SetupScreen Grid.Row="1"
+                             Visibility="{Binding ActiveScreen, Converter={StaticResource EnumVisibileCollapsed}, ConverterParameter=Setup}"/>
+        <controls:AnalyseScreen Grid.Row="1"
+                             Visibility="{Binding ActiveScreen, Converter={StaticResource EnumVisibileCollapsed}, ConverterParameter=Analyse}"/>
+-->     
         <!-- Navigation buttons -->
         <StackPanel Grid.Row="2" Orientation="Horizontal" FlowDirection="LeftToRight" >
             <Button Content="Setup" Command="{Binding NavigateToSetup}"

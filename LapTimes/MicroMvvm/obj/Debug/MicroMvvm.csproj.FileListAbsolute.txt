@@ -1,0 +1,4 @@
+C:\Users\Robert\Documents\Visual Studio 2013\Projects\LapTimes\LapTimes\MicroMvvm\bin\Debug\MicroMvvm.dll
+C:\Users\Robert\Documents\Visual Studio 2013\Projects\LapTimes\LapTimes\MicroMvvm\bin\Debug\MicroMvvm.pdb
+C:\Users\Robert\Documents\Visual Studio 2013\Projects\LapTimes\LapTimes\MicroMvvm\obj\Debug\MicroMvvm.dll
+C:\Users\Robert\Documents\Visual Studio 2013\Projects\LapTimes\LapTimes\MicroMvvm\obj\Debug\MicroMvvm.pdb
