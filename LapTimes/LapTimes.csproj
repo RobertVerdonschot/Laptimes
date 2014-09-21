@@ -68,6 +68,7 @@
     <Compile Include="MarkupExtentions\BindToMarkupExtension.cs" />
     <Compile Include="MarkupExtentions\EnumerationExtention.cs" />
     <Compile Include="Model\ILap.cs" />
+    <Compile Include="Model\ILapObserver.cs" />
     <Compile Include="Model\IRace.cs" />
     <Compile Include="Model\IRaceSetup.cs" />
     <Compile Include="Model\ITeamMember.cs" />

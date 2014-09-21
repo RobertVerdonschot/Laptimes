@@ -15,5 +15,7 @@ namespace LapTimes.Model
         DateTime lapTime { get; set; }
         bool started { get; set; }
         bool finished { get; set; }
+
+        event EventHandler<ILap> LapChangedEvent;        
     }
 }

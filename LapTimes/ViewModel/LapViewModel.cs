@@ -21,6 +21,16 @@ namespace LapTimes.ViewModel
         public LapViewModel(ILap lap)
         {
             this._lap = lap;
+            this._lap.LapChangedEvent += LapChangedEventHandler;
+        }
+
+        public void LapChangedEventHandler(object sender, ILap e)
+        {
+            RaisePropertyChanged("lapNumber");
+            RaisePropertyChanged("teamMember");
+            RaisePropertyChanged("startTime");
+            RaisePropertyChanged("started");
+            RaisePropertyChanged("finished");
         }
     }
 }

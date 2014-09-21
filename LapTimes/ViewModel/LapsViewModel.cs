@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Collections.ObjectModel;
+using System.Windows.Input;
+
 using MicroMvvm;
 using LapTimes.Model;
 
@@ -20,7 +22,7 @@ namespace LapTimes.ViewModel
             private set { }
         }
 
-        public ObservableCollection<LapViewModel> LapsRunning
+        public ObservableCollection<LapViewModel> LapsInProgress
         {
             get
             {
@@ -59,18 +61,59 @@ namespace LapTimes.ViewModel
         public LapsViewModel()
         {
             // Temporary for testing: instantiate the race and create some laps
-            _race = new Race();
-            _race.raceName = "TestRace";
-            _race.laps.Add(new Lap(1, new TeamMember("Piet"), new DateTime(2014, 8, 24, 13, 00, 0), true, true));
-            _race.laps.Add(new Lap(2, new TeamMember("Jaap"), new DateTime(2014, 8, 24, 13, 21, 0), true, true));
-            _race.laps.Add(new Lap(3, new TeamMember("Kees"), new DateTime(2014, 8, 24, 13, 42, 0), true, true));
-            _race.laps.Add(new Lap(4, new TeamMember("Hans"), new DateTime(2014, 8, 24, 14, 03, 0), true, true));
-            _race.laps.Add(new Lap(5, new TeamMember("Piet"), new DateTime(2014, 8, 24, 14, 24, 0), true, false));
-            _race.laps.Add(new Lap(6, new TeamMember("Jaap"), new DateTime(2014, 8, 24, 14, 45, 0), false, false));
-            _race.laps.Add(new Lap(7, new TeamMember("Kees"), new DateTime(2014, 8, 24, 15, 06, 0), false, false));
-            _race.laps.Add(new Lap(8, new TeamMember("Hans"), new DateTime(2014, 8, 24, 15, 27, 0), false, false));
-                        
+            Race race = new Race();
+            race.raceName = "TestRace";
+            race.laps.Add(new Lap(race, 1, new TeamMember("Piet"), new DateTime(2014, 8, 24, 13, 00, 0), true, true));
+            race.laps.Add(new Lap(race, 2, new TeamMember("Jaap"), new DateTime(2014, 8, 24, 13, 21, 0), true, true));
+            race.laps.Add(new Lap(race, 3, new TeamMember("Kees"), new DateTime(2014, 8, 24, 13, 42, 0), true, true));
+            race.laps.Add(new Lap(race, 4, new TeamMember("Hans"), new DateTime(2014, 8, 24, 14, 03, 0), true, true));
+            race.laps.Add(new Lap(race, 5, new TeamMember("Piet"), new DateTime(2014, 8, 24, 14, 24, 0), true, false));
+            race.laps.Add(new Lap(race, 6, new TeamMember("Jaap"), new DateTime(2014, 8, 24, 14, 45, 0), false, false));
+            race.laps.Add(new Lap(race, 7, new TeamMember("Kees"), new DateTime(2014, 8, 24, 15, 06, 0), false, false));
+            race.laps.Add(new Lap(race, 8, new TeamMember("Hans"), new DateTime(2014, 8, 24, 15, 27, 0), false, false));
+            race.LapsChangedEvent += LapsChangedEventHandler;
+            _race = race;            
         }
+
+        void LapsChangedEventHandler(object sender, ILap e)
+        {
+            RaisePropertyChanged("LapsToDo");
+            RaisePropertyChanged("LapsInProgress");
+            RaisePropertyChanged("LapsDone");
+        }
+
+        void HandOverExecute()
+        {
+            // Bussiness logic. to be moved...
+            bool startnext = false;
+            foreach (ILap lap in _race.laps)
+            {
+                bool startcurrent = startnext;
+
+                if (lap.started && !lap.finished)
+                {
+                    lap.finished = true;
+                    startnext = true;
+                }
+                else
+                {
+                    startnext = false;
+                }
+
+                if (startcurrent)
+                {
+                    lap.started = true;
+                }
+            }
+        }
+
+        bool CanHandOverExecute()
+        {
+            return true;
+        }
+
+        public ICommand HandOver { get { return new RelayCommand(HandOverExecute, CanHandOverExecute); } }
+
     }
 }
 

@@ -26,8 +26,7 @@
 
         <!-- Header -->
         <StackPanel Grid.Row="0" Orientation="Horizontal">
-            <Image Source="View/LTicon_s.png" Height="20" Margin="10,0" 
-                               HorizontalAlignment="Left" VerticalAlignment="Center" />
+            <Image Source="View/LTicon_s.png" Height="20" Margin="10,0" HorizontalAlignment="Left" VerticalAlignment="Center" />
             <TextBlock Text="Ronden"   
                        Visibility="{Binding ActiveScreen, Converter={StaticResource EnumVisibileCollapsed}, ConverterParameter=Laps}"
                        Margin="0,0" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="18"/>
@@ -40,11 +39,11 @@
         </StackPanel>
 
         <!-- Screen body -->
-        <controls:LapsScreen Grid.Row="1"                              
+        <controls:LapsScreen Grid.Row="1" Margin="10,0"
                              Visibility="{Binding ActiveScreen, Converter={StaticResource EnumVisibileCollapsed}, ConverterParameter=Laps}" />
-<!--    <controls:SetupScreen Grid.Row="1"
+        <!--    <controls:SetupScreen Grid.Row="1" Margin="10,0"
                              Visibility="{Binding ActiveScreen, Converter={StaticResource EnumVisibileCollapsed}, ConverterParameter=Setup}"/>
-        <controls:AnalyseScreen Grid.Row="1"
+        <controls:AnalyseScreen Grid.Row="1" Margin="10,0"
                              Visibility="{Binding ActiveScreen, Converter={StaticResource EnumVisibileCollapsed}, ConverterParameter=Analyse}"/>
 -->     
         <!-- Navigation buttons -->

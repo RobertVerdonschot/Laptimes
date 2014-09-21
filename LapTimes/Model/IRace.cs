@@ -10,6 +10,8 @@ namespace LapTimes.Model
     {
         string raceName { get; set; }
         IRaceSetup raceSetup { get; set; }
-        IList<ILap> laps  { get; set; }       
+        IList<ILap> laps  { get; set; }
+
+        event EventHandler<ILap> LapsChangedEvent;
     }
 }
