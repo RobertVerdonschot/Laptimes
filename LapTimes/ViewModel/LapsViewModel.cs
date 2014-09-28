@@ -7,12 +7,20 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 
 using MicroMvvm;
+using LapTimes.Builder;
+using LapTimes.Logic;
 using LapTimes.Model;
 
 namespace LapTimes.ViewModel
 {
     class LapsViewModel : ObservableObject
     {
+        public LapsViewModel()
+        {
+            _race = IOC.Get<IRace>();
+            _race.LapsChangedEvent += LapsChangedEventHandler;
+        }
+
         public ObservableCollection<LapViewModel> LapsToDo
         {
             get
@@ -40,49 +48,14 @@ namespace LapTimes.ViewModel
             private set { }
         }
 
-        // Convert Lap List to LapViewmodel Collection, 
-        // query only the laps that have the started and finished flags set correctly
-        private ObservableCollection<LapViewModel> LapsToLapViewmodels(IList<ILap> laps, bool started, bool finished)
-        {
-            ObservableCollection<LapViewModel> lapVMCollection = new ObservableCollection<LapViewModel>();
-            foreach(ILap lap in _race.laps)
-            {
-                if ((lap.started == started) && (lap.finished == finished))
-                {
-                    lapVMCollection.Add(new LapViewModel(lap));
-                }
-            }
-            return lapVMCollection;
-        }
-
-        // Temporary for testing: hold an instance of Race here
-        private IRace _race;
-
-        public LapsViewModel()
-        {
-            // Temporary for testing: instantiate the race and create some laps
-            Race race = new Race();
-            race.raceName = "TestRace";
-            race.laps.Add(new Lap(race, 1, new TeamMember("Piet"), new DateTime(2014, 8, 24, 13, 00, 0), true, true));
-            race.laps.Add(new Lap(race, 2, new TeamMember("Jaap"), new DateTime(2014, 8, 24, 13, 21, 0), true, true));
-            race.laps.Add(new Lap(race, 3, new TeamMember("Kees"), new DateTime(2014, 8, 24, 13, 42, 0), true, true));
-            race.laps.Add(new Lap(race, 4, new TeamMember("Hans"), new DateTime(2014, 8, 24, 14, 03, 0), true, true));
-            race.laps.Add(new Lap(race, 5, new TeamMember("Piet"), new DateTime(2014, 8, 24, 14, 24, 0), true, false));
-            race.laps.Add(new Lap(race, 6, new TeamMember("Jaap"), new DateTime(2014, 8, 24, 14, 45, 0), false, false));
-            race.laps.Add(new Lap(race, 7, new TeamMember("Kees"), new DateTime(2014, 8, 24, 15, 06, 0), false, false));
-            race.laps.Add(new Lap(race, 8, new TeamMember("Hans"), new DateTime(2014, 8, 24, 15, 27, 0), false, false));
-            race.LapsChangedEvent += LapsChangedEventHandler;
-            _race = race;            
-        }
-
-        void LapsChangedEventHandler(object sender, ILap e)
+        public void LapsChangedEventHandler(object sender, ILap e)
         {
             RaisePropertyChanged("LapsToDo");
             RaisePropertyChanged("LapsInProgress");
             RaisePropertyChanged("LapsDone");
         }
 
-        void HandOverExecute()
+        public void HandOverExecute()
         {
             // Bussiness logic. to be moved...
             bool startnext = false;
@@ -107,13 +80,30 @@ namespace LapTimes.ViewModel
             }
         }
 
-        bool CanHandOverExecute()
+        public bool CanHandOverExecute()
         {
             return true;
         }
 
         public ICommand HandOver { get { return new RelayCommand(HandOverExecute, CanHandOverExecute); } }
 
+
+        // Convert Lap List to LapViewmodel Collection, 
+        // query only the laps that have the started and finished flags set correctly
+        private ObservableCollection<LapViewModel> LapsToLapViewmodels(IList<ILap> laps, bool started, bool finished)
+        {
+            ObservableCollection<LapViewModel> lapVMCollection = new ObservableCollection<LapViewModel>();
+            foreach (ILap lap in _race.laps)
+            {
+                if ((lap.started == started) && (lap.finished == finished))
+                {
+                    lapVMCollection.Add(new LapViewModel(lap));
+                }
+            }
+            return lapVMCollection;
+        }
+
+        private IRace _race;
     }
 }
 

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LapTimes.Model
 {
-    interface IRace
+    interface IRace : ILapObserver
     {
         string raceName { get; set; }
         IRaceSetup raceSetup { get; set; }
