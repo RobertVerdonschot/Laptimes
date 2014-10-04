@@ -17,15 +17,19 @@ namespace LapTimes.ViewModel
     {
         public LapsViewModel()
         {
-            _race = IOC.Get<IRace>();
-            _race.LapsChangedEvent += LapsChangedEventHandler;
+            race = IOC.Get<IRace>();
+            race.LapsChangedEvent += LapsChangedEventHandler;
+
+            controller = IOC.Get<IController>();
+
+            UpdateHeights();
         }
 
         public ObservableCollection<LapViewModel> LapsToDo
         {
             get
             {
-                return LapsToLapViewmodels(_race.laps, false, false);
+                return LapsToLapViewmodels(race.laps, false, false);
             }
             private set { }
         }
@@ -34,7 +38,7 @@ namespace LapTimes.ViewModel
         {
             get
             {
-                return LapsToLapViewmodels(_race.laps, true, false);
+                return LapsToLapViewmodels(race.laps, true, false);
             }
             private set { }
         }
@@ -43,7 +47,7 @@ namespace LapTimes.ViewModel
         {
             get
             {
-                return LapsToLapViewmodels(_race.laps, true, true);
+                return LapsToLapViewmodels(race.laps, true, true);
             }
             private set { }
         }
@@ -53,39 +57,75 @@ namespace LapTimes.ViewModel
             RaisePropertyChanged("LapsToDo");
             RaisePropertyChanged("LapsInProgress");
             RaisePropertyChanged("LapsDone");
+            UpdateHeights();
         }
 
-        public void HandOverExecute()
-        {
-            // Bussiness logic. to be moved...
-            bool startnext = false;
-            foreach (ILap lap in _race.laps)
-            {
-                bool startcurrent = startnext;
 
-                if (lap.started && !lap.finished)
+        public uint HeightDone { get; private set; }
+        public uint HeightInProgress { get; private set; }
+        public uint HeightToDo { get; private set; }
+
+        private void UpdateHeights()
+        {
+            // constants for finetuning
+            const uint maxTotalHeight = 255;
+            const uint maxItemsPerList = 4;
+            const uint heightHeader = 22;
+            const uint heightPerItem = 21;
+
+            uint nrDone = 0;
+            uint nrInProgress = 0;
+            uint nrToDo = 0;
+
+            // Count laps todo, in progress and done
+            foreach (ILap lap in race.laps)
+            {
+                if (lap.started)
                 {
-                    lap.finished = true;
-                    startnext = true;
+                    if (lap.finished)
+                    {
+                        nrDone++;
+                    }
+                    else
+                    {
+                        nrInProgress++;
+                    }
                 }
                 else
                 {
-                    startnext = false;
-                }
-
-                if (startcurrent)
-                {
-                    lap.started = true;
+                    nrToDo++;
                 }
             }
+
+            // Calculate heights
+            HeightInProgress = nrInProgress * heightPerItem + heightHeader; // always show complete in progress
+            if (nrDone < nrToDo) // start with shortest list and give the other the remaining space
+            {
+                if (nrDone > maxItemsPerList) 
+                    nrDone = maxItemsPerList;
+                HeightDone = nrDone * heightPerItem + heightHeader;
+                HeightToDo = maxTotalHeight - HeightInProgress - HeightDone;
+            }
+            else // (nrToDo < nrDone)
+            {
+                if (nrToDo > maxItemsPerList)
+                    nrToDo = maxItemsPerList;
+                HeightToDo = nrToDo * heightPerItem + heightHeader;
+                HeightDone = maxTotalHeight - HeightInProgress - HeightToDo;
+            }
+
+            RaisePropertyChanged("HeightDone");
+            RaisePropertyChanged("LapsInProgress");
+            RaisePropertyChanged("HeightToDo");
         }
 
-        public bool CanHandOverExecute()
+
+        public void HandOverExecute()
         {
-            return true;
+            controller.HandOver();
         }
 
-        public ICommand HandOver { get { return new RelayCommand(HandOverExecute, CanHandOverExecute); } }
+        public ICommand HandOver { get { return new RelayCommand(HandOverExecute); } }
 
 
         // Convert Lap List to LapViewmodel Collection, 
@@ -93,7 +133,7 @@ namespace LapTimes.ViewModel
         private ObservableCollection<LapViewModel> LapsToLapViewmodels(IList<ILap> laps, bool started, bool finished)
         {
             ObservableCollection<LapViewModel> lapVMCollection = new ObservableCollection<LapViewModel>();
-            foreach (ILap lap in _race.laps)
+            foreach (ILap lap in race.laps)
             {
                 if ((lap.started == started) && (lap.finished == finished))
                 {
@@ -103,7 +143,8 @@ namespace LapTimes.ViewModel
             return lapVMCollection;
         }
 
-        private IRace _race;
+        private IRace race;
+        private IController controller;
     }
 }
 

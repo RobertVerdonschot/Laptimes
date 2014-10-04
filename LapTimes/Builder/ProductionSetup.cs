@@ -16,7 +16,7 @@ namespace LapTimes.Builder
         public override void Load()
         {
             // Logic
-            Bind<Controller>().ToSelf().InSingletonScope();
+            Bind<IController>().To<Controller>().InSingletonScope();
             
             // Model
             Bind<IRace>().To<Race>().InSingletonScope();

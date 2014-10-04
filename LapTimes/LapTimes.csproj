@@ -71,6 +71,7 @@
     <Compile Include="Logic\Controller.cs" />
     <Compile Include="Builder\IOC.cs" />
     <Compile Include="Builder\ProductionSetup.cs" />
+    <Compile Include="Logic\IController.cs" />
     <Compile Include="MarkupExtentions\BindToMarkupExtension.cs" />
     <Compile Include="MarkupExtentions\EnumerationExtention.cs" />
     <Compile Include="Model\ILap.cs" />

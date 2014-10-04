@@ -8,7 +8,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     
-    <Grid>
+    <Grid MaxHeight="400">
         <Grid.DataContext>
             <viewmodel:LapsViewModel />
         </Grid.DataContext>
@@ -28,78 +28,42 @@
         <!-- Three times a listview, how can I change this into one usercontrol with a custom property? --> 
         
         <Label Content="Verstreken" Grid.Row="0"/>
-        <ListView Grid.Column="0" Grid.Row="1" ItemsSource="{Binding LapsDone}" >
+        <ListView Grid.Column="0" Grid.Row="1" ItemsSource="{Binding LapsDone}" Height="{Binding HeightDone}">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="#" Width="25" DisplayMemberBinding="{Binding lapNumber}" />
                     <GridViewColumn Header="Naam" Width="80" DisplayMemberBinding="{Binding teamMember}" />
-                    <GridViewColumn Header="Start" Width="50" DisplayMemberBinding="{Binding startTime}" />
-                    <GridViewColumn Header="Started" Width="50" >
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <CheckBox IsChecked="{Binding started}"/>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                    <GridViewColumn Header="Finished" Width="50" >
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <CheckBox IsChecked="{Binding finished}"/>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
+                    <GridViewColumn Header="Start" Width="60" DisplayMemberBinding="{Binding startTime}" />
+                    <GridViewColumn Header="Finish" Width="60" DisplayMemberBinding="{Binding finishTime}" />
+                    <GridViewColumn Header="Ronde" Width="60" DisplayMemberBinding="{Binding lapTime}" />
                 </GridView>
             </ListView.View>
         </ListView>
    
         <Label Content="Huidig" Grid.Row="2"/>
-        <Button Content="Aflossen" Command="{Binding HandOver}" Grid.Row="2"
-                    Margin="0,5" Width="75" HorizontalAlignment="Right" FontSize="10" />
-        <ListView Grid.Column="0" Grid.Row="3" ItemsSource="{Binding LapsInProgress}" >
-            <ListView.View>
-                <GridView>
+        <Button Content="_Aflossen" Command="{Binding HandOver}" Grid.Row="2"
+                    Margin="0,5" Width="75" HorizontalAlignment="Right" FontSize="10" RenderTransformOrigin="0.5,0.511" />
+        <ListView Grid.Column="0" Grid.Row="3" ItemsSource="{Binding LapsInProgress}" Height="{Binding HeightInProgress}" >
+            <ListView.View >
+                <GridView >
                     <GridViewColumn Header="#" Width="25" DisplayMemberBinding="{Binding lapNumber}" />
                     <GridViewColumn Header="Naam" Width="80" DisplayMemberBinding="{Binding teamMember}" />
-                    <GridViewColumn Header="Start" Width="50" DisplayMemberBinding="{Binding startTime}" />
-                    <GridViewColumn Header="Started" Width="50" >
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <CheckBox IsChecked="{Binding started}"/>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                    <GridViewColumn Header="Finished" Width="50" >
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <CheckBox IsChecked="{Binding finished}"/>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
+                    <GridViewColumn Header="Start" Width="60" DisplayMemberBinding="{Binding startTime}" />
+                    <GridViewColumn Header="" Width="60" DisplayMemberBinding="{Binding empty}" />
+                    <GridViewColumn Header="Ronde" Width="60"  DisplayMemberBinding="{Binding lapTime}" />                    
                 </GridView>
             </ListView.View>
         </ListView>
 
         <Label Content="Te gaan" Grid.Row="4"/>
-        <ListView Grid.Column="0" Grid.Row="5" ItemsSource="{Binding LapsToDo}" >
+        <ListView Grid.Column="0" Grid.Row="5" ItemsSource="{Binding LapsToDo}" Height="{Binding HeightToDo}">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="#" Width="25" DisplayMemberBinding="{Binding lapNumber}" />
                     <GridViewColumn Header="Naam" Width="80" DisplayMemberBinding="{Binding teamMember}" />
-                    <GridViewColumn Header="Start" Width="50" DisplayMemberBinding="{Binding startTime}" />
-                    <GridViewColumn Header="Started" Width="50" >
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <CheckBox IsChecked="{Binding started}"/>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                    <GridViewColumn Header="Finished" Width="50" >
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <CheckBox IsChecked="{Binding finished}"/>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
+                    <GridViewColumn Header="Start" Width="60" DisplayMemberBinding="{Binding startTime}" />
+                    <GridViewColumn Header="" Width="60" DisplayMemberBinding="{Binding empty}" />
+                    <GridViewColumn Header="" Width="60" DisplayMemberBinding="{Binding empty}" />                    
                 </GridView>
             </ListView.View>
         </ListView>

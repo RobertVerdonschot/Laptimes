@@ -13,7 +13,7 @@ namespace LapTimes.Model
         ITeamMember _teamMember;
         DateTime _startTime;
         DateTime _finishTime;
-        DateTime _lapTime;
+        TimeSpan _lapTime;
         bool _started;
         bool _finished;
 
@@ -21,7 +21,7 @@ namespace LapTimes.Model
         public ITeamMember teamMember { get { return _teamMember; } set { _teamMember = value; OnLapChanged(); } }
         public DateTime startTime { get { return _startTime; } set { _startTime = value; OnLapChanged(); } }
         public DateTime finishTime { get { return _finishTime; } set { _finishTime = value; OnLapChanged(); } }
-        public DateTime lapTime { get { return _lapTime; } set { _lapTime = value; OnLapChanged(); } }
+        public TimeSpan lapTime { get { return _lapTime; } set { _lapTime = value; OnLapTimeChanged(); } }
         public bool started { get { return _started; } set { _started = value; OnLapChanged(); } }
         public bool finished { get { return _finished; } set { _finished = value; OnLapChanged(); } }
 
@@ -43,6 +43,15 @@ namespace LapTimes.Model
             if (LapChangedEvent != null)
             {
                 LapChangedEvent(this, this);
+            }
+        }
+
+        public event EventHandler<ILap> LapTimeChangedEvent;
+        private void OnLapTimeChanged()
+        {
+            if (LapTimeChangedEvent != null)
+            {
+                LapTimeChangedEvent(this, this);
             }
         }
     }

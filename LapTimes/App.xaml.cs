@@ -16,7 +16,7 @@ namespace LapTimes
     /// </summary>
     public partial class App : Application
     {
-        Controller controller;
+        IController controller;
 
         protected override void OnStartup(System.Windows.StartupEventArgs e)
         {
@@ -24,7 +24,7 @@ namespace LapTimes
 
             IOC.Setup(new ProductionSetup());
 
-            controller = IOC.Get<Controller>();
+            controller = IOC.Get<IController>();
         }
 
         protected override void OnExit(System.Windows.ExitEventArgs e)

@@ -12,10 +12,11 @@ namespace LapTimes.Model
         ITeamMember teamMember { get; set; }
         DateTime startTime { get; set; }
         DateTime finishTime { get; set; }
-        DateTime lapTime { get; set; }
+        TimeSpan lapTime { get; set; }
         bool started { get; set; }
         bool finished { get; set; }
 
-        event EventHandler<ILap> LapChangedEvent;        
+        event EventHandler<ILap> LapChangedEvent;
+        event EventHandler<ILap> LapTimeChangedEvent;
     }
 }
