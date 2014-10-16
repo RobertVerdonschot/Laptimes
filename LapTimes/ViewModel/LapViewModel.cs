@@ -10,7 +10,7 @@ namespace LapTimes.ViewModel
 {
     class LapViewModel : ObservableObject
     {
-        ILap _lap;
+        private ILap _lap;
 
         public uint lapNumber { get { return _lap.lapNumber; } set { _lap.lapNumber = value; } }
         public string teamMember { get { return _lap.teamMember.name; } set { _lap.teamMember.name = value; } }

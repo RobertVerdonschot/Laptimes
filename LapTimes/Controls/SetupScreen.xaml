@@ -1,0 +1,92 @@
+﻿<UserControl x:Class="LapTimes.Controls.SetupScreen"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+             xmlns:local="clr-namespace:LapTimes.Controls"
+             xmlns:viewmodel="clr-namespace:LapTimes.ViewModel" 
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+
+    <Grid >
+        <Grid.DataContext >
+            <viewmodel:SetupViewModel />
+        </Grid.DataContext>
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+
+        <Label Content="Team" Grid.Row="0"/>
+        <ListView Grid.Row="1" ItemsSource="{Binding team}" >
+            <ListView.View>  
+                <GridView>
+                    <GridViewColumn Header="Naam" >
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate >
+                                <TextBox Text="{Binding name}" BorderThickness="0"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Verwachte rondetijd" >
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate >
+                                <TextBox Text="{Binding expectedLapTime}" BorderThickness="0"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        
+        <Grid Grid.Row="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <Label Content="Ronde afstand [km]" Grid.Row="0" Grid.Column="0"/>
+            <TextBox Text="{Binding lapDistance}" Grid.Row="0" Grid.Column="1" TextAlignment="Right"/>
+
+            <Label Content="Wedstrijd duur" Grid.Row="1" Grid.Column="0"/>
+            <TextBox Text="{Binding raceDuration}" Grid.Row="1" Grid.Column="1" TextAlignment="Right"/>
+            <Label Content="hh:mm:ss" Grid.Row="1" Grid.Column="2"/>
+
+            <Label Content="Starttijd" Grid.Row="2" Grid.Column="0"/>
+            <TextBox Text="{Binding startTime}" Grid.Row="2" Grid.Column="1" TextAlignment="Right"/>
+            <Label Content="hh:mm:ss" Grid.Row="2" Grid.Column="2"/>
+
+            <Label Content="Datum" Grid.Row="3" Grid.Column="0"/>
+            <TextBox Text="{Binding startDate}" Grid.Row="3" Grid.Column="1" TextAlignment="Right"/>
+            <Label Content="dd:mm:yyyy" Grid.Row="3" Grid.Column="2"/>
+<!--
+            <Label Content="Rondes per deelnemer" Grid.Row="4" Grid.Column="0"/>
+            <TextBox Text="{Binding lapsPerShift}" Grid.Row="4" Grid.Column="1" TextAlignment="Right"/>
+    -->    
+            <Label Content="{Binding message}" Grid.Row="5" Grid.Column="0" Foreground="Red"/>
+
+        </Grid>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="3">
+            <Button Content="Genereer ronden" Command="{Binding GenerateLaps}"  />
+            <Label Content="Overschijft geen verstreken ronden" FontSize="10"/>
+        </StackPanel>
+
+    </Grid>
+</UserControl>

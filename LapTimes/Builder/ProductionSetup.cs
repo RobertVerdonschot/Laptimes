@@ -20,7 +20,7 @@ namespace LapTimes.Builder
             
             // Model
             Bind<IRace>().To<Race>().InSingletonScope();
-            Bind<IRaceSetup>().To<RaceSetup>();
+            Bind<ISetup>().To<Setup>();
 
             // Bind<IConfigurationDataStorage>().To<ConfigurationDataStorage>().InSingletonScope();
             // Bind<UIModel>().ToSelf().InSingletonScope();

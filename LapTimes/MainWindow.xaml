@@ -41,9 +41,9 @@
         <!-- Screen body -->
         <controls:LapsScreen Grid.Row="1" Margin="10,0"
                              Visibility="{Binding ActiveScreen, Converter={StaticResource EnumVisibileCollapsed}, ConverterParameter=Laps}" />
-        <!--    <controls:SetupScreen Grid.Row="1" Margin="10,0"
+        <controls:SetupScreen Grid.Row="1" Margin="10,0"
                              Visibility="{Binding ActiveScreen, Converter={StaticResource EnumVisibileCollapsed}, ConverterParameter=Setup}"/>
-        <controls:AnalyseScreen Grid.Row="1" Margin="10,0"
+<!--        <controls:AnalyseScreen Grid.Row="1" Margin="10,0"
                              Visibility="{Binding ActiveScreen, Converter={StaticResource EnumVisibileCollapsed}, ConverterParameter=Analyse}"/>
 -->     
         <!-- Navigation buttons -->

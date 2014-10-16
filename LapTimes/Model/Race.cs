@@ -10,27 +10,32 @@ namespace LapTimes.Model
 {
     class Race : IRace
     {
-        public string raceName { get { return _raceName; } set { _raceName = value; } }
-        public IRaceSetup raceSetup { get { return _raceSetup; } set { _raceSetup = value; } }
-        public IList<ILap> laps { get { return _laps; } set { _laps = value; } }
+        public string raceName { get { return _raceName; } set { _raceName = value; OnRaceChanged(); } }
+        public ISetup setup { get { return _raceSetup; } set { _raceSetup = value; OnRaceChanged(); } }
+        public IList<ILap> laps { get { return _laps; } set { _laps = value; OnRaceChanged(); } }
 
         public Race()
         {
             _laps = new List<ILap>();
-            _raceSetup = IOC.Get<IRaceSetup>();
+            _raceSetup = IOC.Get<ISetup>();
         }
 
-        public event EventHandler<ILap> LapsChangedEvent;
-        public void OnLapChanged(ILap lap)
+        public event RaceEventHandler RaceChangedEvent;
+        public void OnRaceChanged()
         {
-            if (LapsChangedEvent != null)
+            if (RaceChangedEvent != null)
             {
-                LapsChangedEvent(this, lap);
+                RaceChangedEvent();
             }
         }
 
+        public void OnLapChanged(ILap lap)
+        {
+            OnRaceChanged();
+        }
+
         private string _raceName;
-        private IRaceSetup _raceSetup;
+        private ISetup _raceSetup;
         private IList<ILap> _laps;
     }
 }

@@ -34,30 +34,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Ninject">
-      <HintPath>..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
-    </Reference>
-    <Reference Include="PresentationFramework" />
-    <Reference Include="System" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xml" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Xaml">
-      <RequiredTargetFramework>4.0</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="WindowsBase" />
-    <Reference Include="PresentationCore" />
   </ItemGroup>
   <ItemGroup>
-    <ApplicationDefinition Include="App.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </ApplicationDefinition>
     <Compile Include="Controls\LapsScreen.xaml.cs">
       <DependentUpon>LapsScreen.xaml</DependentUpon>
     </Compile>
@@ -91,23 +69,6 @@
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Compile Include="ViewModel\MemberViewModel.cs" />
     <Compile Include="ViewModel\SetupViewModel.cs" />
-    <Compile Include="ViewModel\ViewModelHelper.cs" />
-    <Page Include="Controls\LapsScreen.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\SetupScreen.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="GlobalResources.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="MainWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -135,9 +96,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="packages.config">
-      <SubType>Designer</SubType>
-    </None>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -149,7 +108,6 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <Resource Include="View\LTicon_s.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="MicroMvvm\MicroMvvm.csproj">
@@ -165,4 +123,35 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <ItemGroup>
+    <ReferencePath Include="C:\Users\Robert\Documents\GitHub\LapTimes\LapTimes\MicroMvvm\bin\Debug\MicroMvvm.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\Microsoft.CSharp.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\mscorlib.dll" />
+    <ReferencePath Include="C:\Users\Robert\Documents\GitHub\LapTimes\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\PresentationCore.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\PresentationFramework.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\System.Core.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\System.Data.DataSetExtensions.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\System.Data.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\System.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\System.Drawing.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\System.Windows.Forms.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\System.Xaml.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\System.Xml.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\System.Xml.Linq.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\WindowsBase.dll" />
+    <ReferencePath Include="C:\Users\Robert\Documents\GitHub\LapTimes\packages\Extended.Wpf.Toolkit.2.2.1\lib\net40\Xceed.Wpf.AvalonDock.dll" />
+    <ReferencePath Include="C:\Users\Robert\Documents\GitHub\LapTimes\packages\Extended.Wpf.Toolkit.2.2.1\lib\net40\Xceed.Wpf.AvalonDock.Themes.Aero.dll" />
+    <ReferencePath Include="C:\Users\Robert\Documents\GitHub\LapTimes\packages\Extended.Wpf.Toolkit.2.2.1\lib\net40\Xceed.Wpf.AvalonDock.Themes.Metro.dll" />
+    <ReferencePath Include="C:\Users\Robert\Documents\GitHub\LapTimes\packages\Extended.Wpf.Toolkit.2.2.1\lib\net40\Xceed.Wpf.AvalonDock.Themes.VS2010.dll" />
+    <ReferencePath Include="C:\Users\Robert\Documents\GitHub\LapTimes\packages\Extended.Wpf.Toolkit.2.2.1\lib\net40\Xceed.Wpf.DataGrid.dll" />
+    <ReferencePath Include="C:\Users\Robert\Documents\GitHub\LapTimes\packages\Extended.Wpf.Toolkit.2.2.1\lib\net40\Xceed.Wpf.Toolkit.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="C:\Users\Robert\Documents\GitHub\LapTimes\LapTimes\obj\Debug\Controls\LapsScreen.g.cs" />
+    <Compile Include="C:\Users\Robert\Documents\GitHub\LapTimes\LapTimes\obj\Debug\Controls\SetupScreen.g.cs" />
+    <Compile Include="C:\Users\Robert\Documents\GitHub\LapTimes\LapTimes\obj\Debug\MainWindow.g.cs" />
+    <Compile Include="C:\Users\Robert\Documents\GitHub\LapTimes\LapTimes\obj\Debug\App.g.cs" />
+    <Compile Include="C:\Users\Robert\Documents\GitHub\LapTimes\LapTimes\obj\Debug\GeneratedInternalTypeHelper.g.cs" />
+  </ItemGroup>
 </Project>

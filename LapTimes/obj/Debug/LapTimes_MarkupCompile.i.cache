@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\Robert\Documents\GitHub\LapTimes\LapTimes\App.xaml
-3-1818018226
+4658525673
 
-35-798120139
+391963533139
 16-72884694
-Controls\LapsScreen.xaml;GlobalResources.xaml;MainWindow.xaml;
+Controls\LapsScreen.xaml;Controls\SetupScreen.xaml;GlobalResources.xaml;MainWindow.xaml;
 
 False
 

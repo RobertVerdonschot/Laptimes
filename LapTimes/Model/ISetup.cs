@@ -6,12 +6,14 @@ using System.Threading.Tasks;
 
 namespace LapTimes.Model
 {
-    interface IRaceSetup
+    interface ISetup
     {
         uint lapDistance { get; set; }
-        DateTime raceDuration { get; set; }
+        TimeSpan raceDuration { get; set; }
         DateTime startTime { get; set; }
         uint lapsPerShift { get; set; }
-        IList<ITeamMember> teamMembers { get; set; }
+        IList<ITeamMember> team { get; set; }
+
+        event EventHandler SetupChangedEvent;        
     }
 }

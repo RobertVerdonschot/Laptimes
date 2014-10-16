@@ -6,12 +6,15 @@ using System.Threading.Tasks;
 
 namespace LapTimes.Model
 {
+    public delegate void RaceEventHandler();
+
     interface IRace : ILapObserver
     {
         string raceName { get; set; }
-        IRaceSetup raceSetup { get; set; }
+        ISetup setup { get; set; }
         IList<ILap> laps  { get; set; }
-
-        event EventHandler<ILap> LapsChangedEvent;
+        
+        void OnRaceChanged();
+        event RaceEventHandler RaceChangedEvent;
     }
 }

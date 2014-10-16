@@ -18,7 +18,7 @@ namespace LapTimes.ViewModel
         public LapsViewModel()
         {
             race = IOC.Get<IRace>();
-            race.LapsChangedEvent += LapsChangedEventHandler;
+            race.RaceChangedEvent += RaceChangedEventHandler;
 
             controller = IOC.Get<IController>();
 
@@ -52,14 +52,13 @@ namespace LapTimes.ViewModel
             private set { }
         }
 
-        public void LapsChangedEventHandler(object sender, ILap e)
+        public void RaceChangedEventHandler()
         {
-            RaisePropertyChanged("LapsToDo");
-            RaisePropertyChanged("LapsInProgress");
-            RaisePropertyChanged("LapsDone");
+            RaisePropertyChanged(() => LapsToDo);
+            RaisePropertyChanged(() => LapsInProgress);
+            RaisePropertyChanged(() => LapsDone);
             UpdateHeights();
         }
-
 
         public uint HeightDone { get; private set; }
         public uint HeightInProgress { get; private set; }
@@ -68,10 +67,10 @@ namespace LapTimes.ViewModel
         private void UpdateHeights()
         {
             // constants for finetuning
-            const uint maxTotalHeight = 255;
-            const uint maxItemsPerList = 4;
-            const uint heightHeader = 22;
-            const uint heightPerItem = 21;
+            const uint maxTotalHeight = 255; // pixels
+            const uint maxItemsPerList = 4;  // rows
+            const uint heightHeader = 22;    // pixels
+            const uint heightPerItem = 21;   // pixels
 
             uint nrDone = 0;
             uint nrInProgress = 0;
@@ -114,9 +113,9 @@ namespace LapTimes.ViewModel
                 HeightDone = maxTotalHeight - HeightInProgress - HeightToDo;
             }
 
-            RaisePropertyChanged("HeightDone");
-            RaisePropertyChanged("LapsInProgress");
-            RaisePropertyChanged("HeightToDo");
+            RaisePropertyChanged(() => HeightDone);
+            RaisePropertyChanged(() => LapsInProgress);
+            RaisePropertyChanged(() => HeightToDo);
         }
 
 

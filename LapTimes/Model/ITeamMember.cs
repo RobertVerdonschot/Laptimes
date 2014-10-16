@@ -1,14 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using MicroMvvm;
+
 namespace LapTimes.Model
 {
-    interface ITeamMember
+    interface ITeamMember 
     {
         string name { get; set; }
-        DateTime expectedLapTime  { get; set; }
+        TimeSpan expectedLapTime  { get; set; }
+        TimeSpan averageLapTime { get; set; }
     }
 }
